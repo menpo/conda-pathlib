@@ -1,0 +1,12 @@
+build: false
+
+platform:
+- x86
+- x64
+
+init:
+- ps: Start-FileDownload 'https://raw.githubusercontent.com/jabooth/traviconda/master/traviconda.py' C:\\traviconda.py; echo "Done"
+- cmd: python C:\\traviconda.py setup 2 --channel menpo
+
+install:
+- cmd: C:\\Miniconda\\python C:\\traviconda.py auto ./conda --binstaruser menpo --binstarkey tehehe

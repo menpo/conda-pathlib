@@ -1,0 +1,7 @@
+install:
+- wget https://raw.githubusercontent.com/jabooth/traviconda/master/traviconda.py -O traviconda.py
+- python traviconda.py setup 2 --channel menpo
+- export PATH=/home/travis/miniconda/bin:$PATH
+
+script:
+- python traviconda.py auto ./conda --binstaruser menpo --binstarchannel main --binstarkey $BINSTAR_KEY
