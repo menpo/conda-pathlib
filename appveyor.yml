@@ -1,7 +1,7 @@
 build: false
 
 environment:
-  BINSTAR_USER:
+  BINSTAR_KEY:
     secure: +898Jq8ABUvA4m0m/9QaGB12v1SLy1WJAhW20irIFuDtWl6RVuEVuGRBzhDpKqko
 
 platform:
@@ -13,4 +13,4 @@ init:
 - python C:\\traviconda.py setup 2 --channel menpo
 
 install:
-- C:\\Miniconda\\python C:\\traviconda.py auto ./conda --binstaruser menpo --binstarkey %BINSTAR_USER%
+- C:\\Miniconda\\python C:\\traviconda.py auto ./conda --binstarchannel main --binstaruser menpo --binstarkey %BINSTAR_KEY%
