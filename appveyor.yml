@@ -5,8 +5,11 @@ environment:
     BINSTAR_USER: menpo
     BINSTAR_KEY:
       secure: mw1Fz5a5C0lT4CXzsOCADoo/Xa9YymZI3yjVZNR8f5GwYrVAOC2YXxyEG6NaSWZY
-    PYTHON_VERSION: 2.7
-    
+  matrix:
+    - PYTHON_VERSION: 2.7
+    - PYTHON_VERSION: 3.4
+    - PYTHON_VERSION: 3.5
+
 matrix:
   fast_finish: true
 
@@ -15,11 +18,14 @@ platform:
 - x64
 
 init:
-- ps: Start-FileDownload 'https://raw.githubusercontent.com/menpo/condaci/v0.3.0/condaci.py' C:\\condaci.py; echo "Done"
-- cmd: python C:\\condaci.py setup %PYTHON_VERSION% --channel %BINSTAR_USER%
+- ps: Start-FileDownload 'https://raw.githubusercontent.com/menpo/condaci/v0.4.6/condaci.py' C:\\condaci.py; echo "Done"
+- cmd: python C:\\condaci.py setup
 
 install:
-- cmd: C:\\Miniconda\\python C:\\condaci.py auto ./conda --binstarchannel main --binstaruser %BINSTAR_USER% --binstarkey %BINSTAR_KEY%
+- cmd: set tmp_cmd=python C:\\condaci.py miniconda_dir
+- cmd: "FOR /F %%i IN (' %tmp_cmd% ') DO SET APPV_MINICONDA_DIR=%%i"
+- cmd: set APPV_MINICONDA_EXE="%APPV_MINICONDA_DIR%\python.exe"
+- cmd: "%APPV_MINICONDA_EXE% C:\\condaci.py build conda"
 
 notifications:
   - provider: Slack
@@ -29,3 +35,4 @@ notifications:
     on_build_status_changed: true
     on_build_success: false
     on_build_failure: false
+
